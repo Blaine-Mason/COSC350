@@ -1,24 +1,21 @@
 # TASK 3:
-2.) Write out your answers to the following questions
-
-    a.) What are the permissions on the file?
+## Write out your answers to the following questions
+   ### What are the permissions on the file?
         -rw-rw-r--
         read write for users, read write for groups, and just read for others.
-
-    b.) Who owns the file?
+   ### Who owns the file?
         (base) ➜  ~ ls -l foo
         -rw-rw-r-- 1 blaine blaine 0 Feb  4 12:51 foo 
         "blaine" owns the file
-
-    c.) What group is associated with the file?
+   ### What group is associated with the file?
         ```
         (base) ➜  ~ ls -lg foo
         -rw-rw-r-- 1 blaine 0 Feb  4 12:51 foo
         ```
         the "blaine" group is associated with this file
-    d.) Are you in the group? (Invoke groups to find out).
+   ### Are you in the group? (Invoke groups to find out).
         From the answer below we can see that I am in fact a member of the "blaine" group
-    e.) Write down the names of all the groups you are in.
+   ### Write down the names of all the groups you are in.
         ```
         (base) ➜  ~ cat /etc/group
         root:x:0: daemon:x:1: bin:x:2: sys:x:3: adm:x:4:syslog,blaine tty:x:5:syslog disk:x:6: lp:x:7: mail:x:8: news:x:9: uucp:x:10: man:x:12: proxy:x:13: kmem:x:15:
@@ -27,9 +24,7 @@
         avahi:x:121: scanner:x:122:saned saned:x:123: nm-openvpn:x:124: whoopsie:x:125: colord:x:126: geoclue:x:127: pulse:x:128: pulse-access:x:129: gdm:x:130: lxd:x:131:blaine
         blaine:x:1000: sambashare:x:132:blaine systemd-coredump:x:999: lightdm:x:133: nopasswdlogin:x:134:
         ```
-3.) Change the permissions on ~/foo so owner has only execute permission, group has only write permission,
+## Change the permissions on ~/foo so owner has only execute permission, group has only write permission,
 and all others have both read and execute permission. Write out the command(s) you used to do this.
-
-4.) Attempt to delete the file. Write down the command you used and what happened.
-
-5.) Change permissions on ~/foo so you can delete it, then do so. 
+## Attempt to delete the file. Write down the command you used and what happened.
+## Change permissions on ~/foo so you can delete it, then do so. 
