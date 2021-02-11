@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lab-01.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="blaine-mason">Blaine Mason</h2>
+<h2 id="lab-01">Lab-01</h2>
+<h2 id="drpark">Dr.Park</h2>
+<h1 id="task-1">Task 1:</h1>
+<h2 id="1-write-down-the-absolute-path-to-the-directory-named-include-on-the-far-left-of-the-figure">1.) Write down the absolute path to the directory named include on the far left of the figure.</h2>
+<pre><code>/usr/include
+</code></pre>
+<h1 id="task-2">Task 2:</h1>
+<h2 id="1-write-down-the-relative-path-from-the-directory-dev-to-the-file-binls">1.) Write down the relative path from the directory /dev to the file /bin/ls.</h2>
+<pre><code>../bin/ls
+</code></pre>
+<h1 id="task-3">Task 3:</h1>
+<h2 id="2-write-out-your-answers-to-the-following-questions">2.) Write out your answers to the following questions</h2>
+<h3 id="a-what-are-the-permissions-on-the-file">a.) What are the permissions on the file?</h3>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -l foo
+-rw-rw-r-- 1 blaine blaine 0 Feb  4 12:51 foo 
+</div></code></pre>
+<ul>
+<li>read write for users, read write for groups, and just read for others.</li>
+</ul>
+<h3 id="b-who-owns-the-file">b.)  Who owns the file?</h3>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -l foo
+-rw-rw-r-- 1 blaine blaine 0 Feb  4 12:51 foo 
+</div></code></pre>
+<ul>
+<li>&quot;blaine&quot; owns the file</li>
+</ul>
+<h3 id="c-what-group-is-associated-with-the-file">c.) What group is associated with the file?</h3>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -lg foo
+-rw-rw-r-- 1 blaine 0 Feb  4 12:51 foo
+</div></code></pre>
+<ul>
+<li>the &quot;blaine&quot; group is associated with this file</li>
+</ul>
+<h3 id="d-are-you-in-the-group-invoke-groups-to-find-out">d.) Are you in the group? (Invoke groups to find out).</h3>
+<ul>
+<li>From the answer below we can see that I am in fact a member of the &quot;blaine&quot; group</li>
+</ul>
+<h3 id="e-write-down-the-names-of-all-the-groups-you-are-in">e.) Write down the names of all the groups you are in.</h3>
+<pre class="hljs"><code><div>(base) ➜  ~ cat /etc/group
+root:x:0: daemon:x:1: bin:x:2: sys:x:3: adm:x:4:syslog,blaine tty:x:5:syslog disk:x:6: lp:x:7: mail:x:8: news:x:9: uucp:x:10: man:x:12: proxy:x:13: kmem:x:15:
+dialout:x:20: fax:x:21: voice:x:22: cdrom:x:24:blaine floppy:x:25: tape:x:26: sudo:x:27:blaine audio:x:29:pulse dip:x:30:blaine www-data:x:33: backup:x:34: operator:x:37: list:x:38: irc:x:39: src:x:40: gnats:x:41: shadow:x:42: utmp:x:43: video:x:44: sasl:x:45: plugdev:x:46:blaine staff:x:50: games:x:60: users:x:100: nogroup:x:65534:
+systemd-journal:x:101: systemd-network:x:102: systemd-resolve:x:103: systemd-timesync:x:104: crontab:x:105: messagebus:x:106: input:x:107: kvm:x:108: render:x:109: syslog:x:110: tss:x:111: bluetooth:x:112: ssl-cert:x:113: uuidd:x:114: tcpdump:x:115: avahi-autoipd:x:116: rtkit:x:117: ssh:x:118: netdev:x:119: lpadmin:x:120:blaine
+avahi:x:121: scanner:x:122:saned saned:x:123: nm-openvpn:x:124: whoopsie:x:125: colord:x:126: geoclue:x:127: pulse:x:128: pulse-access:x:129: gdm:x:130: lxd:x:131:blaine
+blaine:x:1000: sambashare:x:132:blaine systemd-coredump:x:999: lightdm:x:133: nopasswdlogin:x:134:
+</div></code></pre>
+<h2 id="3-change-the-permissions-on-foo-so-owner-has-only-execute-permission-group-has-only-write-permission-and-all-others-have-both-read-and-execute-permission-write-out-the-commands-you-used-to-do-this">3.) Change the permissions on ~/foo so owner has only execute permission, group has only write permission, and all others have both read and execute permission. Write out the command(s) you used to do this.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ chmod u-rw foo
+(base) ➜  ~ chmod u+x foo
+</div></code></pre>
+<pre class="hljs"><code><div>(base) ➜  ~ chmod g-r foo
+</div></code></pre>
+<pre class="hljs"><code><div>(base) ➜  ~ chmod o+x foo
+</div></code></pre>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -l foo
+---x-w-r-x 1 blaine blaine 0 Feb  4 13:23 foo
+</div></code></pre>
+<h2 id="4-attempt-to-delete-the-file-write-down-the-command-you-used-and-what-happened">4.) Attempt to delete the file. Write down the command you used and what happened.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ rm foo
+rm: remove write-protected regular empty file 'foo'?
+</div></code></pre>
+<h2 id="5-change-permissions-on-foo-so-you-can-delete-it-then-do-so">5.) Change permissions on ~/foo so you can delete it, then do so.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ chmod u+w foo 
+(base) ➜  ~ rm foo
+</div></code></pre>
+<h1 id="task-4">Task 4:</h1>
+<h2 id="2-there-are-many-options-available-for-ls-but-the-most-important-ones-are-al-and-r-write-down-the-meanings-of-each-of-these-options">2.) There are many options available for ls but the most important ones are a,l, and R. Write down the meanings of each of these options.</h2>
+<pre class="hljs"><code><div>-a
+    do not ignore entries starting with .
+
+-l    
+    use a long listing format
+
+-R
+    list subdirectories recursively
+</div></code></pre>
+<h2 id="3-move-to-your-home-directory-and-invoke-ls-with-no-options-now-invoke-ls--l-now-invoke-ls--a-write-down-how-the-output-of-ls-differs-from-the-output-of-ls--a">3.) Move to your home directory and invoke ls with no options. Now invoke ls -l. Now invoke ls -a. Write down how the output of ls differs from the output of ls -a.</h2>
+<ul>
+<li><em><strong>ls</strong></em> lists the directories.</li>
+<li><em><strong>ls -a</strong></em> lists the all the dotfiles, files, and directories.</li>
+</ul>
+<h2 id="4-different-entities-may-have-the-same-name-for-example-time-as-a-user-command-differs-from-time-as-a-system-call-write-down-the-name-information-for-both-of-these-time-entities">4.) Different entities may have the same name. For example time as a user command differs from time as a system call. Write down the NAME information for both of these time entities.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ man 1 time
+NAME
+       time - run programs and summarize system resource usage
+</div></code></pre>
+<pre class="hljs"><code><div>(base) ➜  ~ man 2 time
+NAME
+       time - get time in seconds
+</div></code></pre>
+<h2 id="5-of-course-man-itself-is-a-user-command-so-it-should-have-a-man-page-write-down-the-name-information-for-the-man-page-on-man">5.) Of course, man itself is a user command, so it should have a man page. Write down the NAME information for the man page on man.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ man man
+NAME
+       man - an interface to the system reference manuals
+</div></code></pre>
+<h1 id="task-5">Task 5:</h1>
+<h2 id="2-write-down-the-result-of-invoking-the-command-pwd">2.) Write down the result of invoking the command pwd.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ pwd
+/home/blaine
+</div></code></pre>
+<h2 id="3-walk-one-level-up-the-file-system-hierarchy-using-the-cd-command-write-down-the-exact-command-you-invoked">3.) Walk one level up the file system hierarchy using the cd command. Write down the exact command you invoked.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ cd ..
+</div></code></pre>
+<h2 id="4-write-down-the-result-of-invoking-the-command-pwd">4.) Write down the result of invoking the command pwd.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ pwd
+/home
+</div></code></pre>
+<h2 id="5-write-down-the-permissions-on-your-home-directory">5.) Write down the permissions on your home directory.</h2>
+<pre class="hljs"><code><div>(base) ➜  /home ls -l
+drwxr-xr-x 35 blaine blaine 4096 Feb  4 13:54 blaine
+</div></code></pre>
+<h2 id="6-get-back-to-your-home-directory">6.) Get back to your home directory.</h2>
+<pre class="hljs"><code><div>(base) ➜  /home cd
+(base) ➜  ~
+</div></code></pre>
+<h1 id="task-6">Task 6:</h1>
+<h2 id="1-write-down-the-file-type-of-binbash">1.) Write down the file type of /bin/bash.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ file /bin/bash
+/bin/bash: ELF 64-bit LSB shared object
+</div></code></pre>
+<h2 id="2-create-an-empty-file-named-foo-write-down-the-file-type-of-this-file">2.) Create an empty file named foo. Write down the file type of this file.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ file foo 
+foo: empty
+</div></code></pre>
+<h2 id="3-write-down-the-file-type-of-the-file-bashhistory-yes-there-is-a-dot-before-the-file-name-it-indicates-that-this-is-a-%22hidden%22-file-not-displayed-with-ls-by-default">3.) Write down the file type of the file ~/.bash_history (yes, there is a dot before the file name. It indicates that this is a &quot;hidden&quot; file, not displayed with ls by default.)</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ file ~/.bash_history
+/home/blaine/.bash_history: ASCII text
+</div></code></pre>
+<h2 id="4-write-down-the-file-type-of-usrlocal">4.) Write down the file type of /usr/local.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ file /usr/local
+/usr/local: directory
+</div></code></pre>
+<h1 id="task-7">Task 7:</h1>
+<h2 id="4-the-head-command-allows-you-to-see-the-top-part-of-a-file-you-may-specify-the-number-of-lines-you-want-or-default-to-ten-lines-use-head-to-display-the-first-5-lines-of-bashhistory-write-down-the-exact-command-you-used">4.) The head command allows you to see the top part of a file. You may specify the number of lines you want, or default to ten lines. Use head to display the first 5 lines of ~/.bash_history. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ head -n 5 ~/.bash_history
+sudo apt install plank
+sudo apt-get install plank
+sudo apt remove gnome-shell-extension-ubuntu-dock 
+restart now
+shutdown now
+</div></code></pre>
+<h2 id="5-5-the-tail-command-works-like-head-except-that-it-shows-the-last-lines-of-a-file-use-tail-to-display-the-last-10-lines-of-bashhistory-write-down-the-exact-command-you-used">5.) 5. The tail command works like head, except that it shows the last lines of a file. Use tail to display the last 10 lines of ~/.bash_history. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ tail -n 10 ~/.bash_history
+exit
+chsh -s /usr/bin/zsh blaine
+exit
+nvim test.tex
+exit
+ls
+PS1='PEXPE\[\]CT_PROMPT&gt;' PS2='PEXPE\[\]CT_PROMPT_' PROMPT_COMMAND=''
+export TERM=dumb PAGER=cat
+jupyter-notebook
+exit
+</div></code></pre>
+<h1 id="task-8">Task 8:</h1>
+<h2 id="1-copy-the-file-bashhistory-to-the-file-dotbashhistory-write-down-the-exact-command-you-used">1.) Copy the file ~/.bash_history to the file ~/dotbashhistory. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ cp ~/.bash_history ~/dotbashhistory
+</div></code></pre>
+<h2 id="2-write-down-the-file-and-directory-permissions-necessary-to-successfully-copy-a-file-in-general">2.) Write down the file and directory permissions necessary to successfully copy a file in general.</h2>
+<ul>
+<li>source directory: xr</li>
+<li>source file: r</li>
+<li>destination directory: xw</li>
+<li>destination file: w</li>
+</ul>
+<h2 id="3-invoke-the-exact-command-again-in-an-attempt-to-copy-the-%22source%22-to-the-now-existing-%22destination%22-write-down-how-the-system-handled-this">3.) Invoke the exact command again in an attempt to copy the &quot;source&quot; to the now-existing &quot;destination.&quot; Write down how the system handled this.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ cp ~/.bash_history ~/dotbashhistory
+</div></code></pre>
+<ul>
+<li>no output</li>
+</ul>
+<h2 id="4-compare-the-permissions-and-date-on-the-original-file-and-the-copy-write-down-if-and-how-they-differ">4.) Compare the permissions and date on the original file and the copy. Write down if and how they differ.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -l ~/.bash_history 
+-rw------- 1 blaine blaine 4062 Dec 11 13:02 /home/blaine/.bash_history
+</div></code></pre>
+<pre class="hljs"><code><div>(base) ➜  ~ ls -l ~/dotbashhistory
+-rw------- 1 blaine blaine 4062 Feb  4 14:18 /home/blaine/dotbashhistory
+</div></code></pre>
+<ul>
+<li>No difference between permissions, but they have different dates.</li>
+</ul>
+<h2 id="5-write-down-the-cp-command-you-would-use-to-insure-that-the-copy-has-the-same-permissions-and-date-as-the-original">5.) Write down the cp command you would use to insure that the copy has the same permissions and date as the original.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ cp ~/.bash_history ~/dotbashhistory --preserve
+</div></code></pre>
+<h1 id="task-9">Task 9:</h1>
+<h2 id="1-rename-your-dotbashhistory-as-dotbashhistoryold-write-down-the-exact-command-you-used">1.) Rename your ~/dotbashhistory as ~/dotbashhistory.old. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ mv ~/dotbashhistory ~/dotbashhistory.old
+</div></code></pre>
+<h1 id="task-10">Task 10:</h1>
+<h2 id="1-remove-dotbashhistoryold-write-down-the-exact-command-you-used">1.) Remove ~/dotbashhistory.old. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ rm ~/dotbashhistory.old 
+</div></code></pre>
+<h1 id="task-11">Task 11:</h1>
+<h2 id="1-create-the-directory-foo-write-down-the-exact-command-you-used">1.) Create the directory ~/Foo. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ mkdir ~/Foo
+</div></code></pre>
+<h2 id="2-write-down-the-permissions-of-this-new-directory">2.) Write down the permissions of this new directory.</h2>
+<pre class="hljs"><code><div>drwxrwxr-x  2 blaine blaine      4096 Feb  4 14:27 Foo
+</div></code></pre>
+<ul>
+<li>user: read write executable</li>
+<li>group: read write executable</li>
+<li>other: read executable</li>
+</ul>
+<h2 id="3-create-a-directory-named-bar-within-the-foo-directory-write-down-the-exact-command-you-used">3.) Create a directory named Bar, within the Foo directory. Write down the exact command you used.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ mkdir ~/Foo/Bar/
+</div></code></pre>
+<h1 id="task-12">Task 12:</h1>
+<h2 id="1-write-down-what-happens-when-you-invoke-rmdir-foo">1.) Write down what happens when you invoke rmdir ~/Foo.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ rmdir ~/Foo
+rmdir: failed to remove '/home/blaine/Foo': Directory not empty
+</div></code></pre>
+<h2 id="2-write-down-a-sequence-of-rmdir-commands-that-would-allow-removal-of-the-foo-directory-and-its-subdirectory-bar-dont-invoke-the-commands-just-write-down-what-you-would-do">2.) Write down a sequence of rmdir commands that would allow removal of the ~/Foo directory and its subdirectory Bar. Don't invoke the commands, just write down what you would do.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ rmdir ~/Foo/Bar
+(base) ➜  ~ rmdir ~/Foo
+</div></code></pre>
+<h2 id="3-invoke-a-single-rm-command-to-remove-the-foo-directory-and-all-its-contents-check-the-man-page-write-down-the-exact-command-you-used-hint-it-involves-two-flags-one-to-force-the-operation-the-other-to-descend-the-directory-recursively">3.) Invoke a single rm command to remove the ~/Foo directory and all its contents (check the man page). Write down the exact command you used. Hint: it involves two flags, one to force the operation, the other to descend the directory recursively.</h2>
+<pre class="hljs"><code><div>(base) ➜  ~ rm -rf ~/Foo
+</div></code></pre>
+
+</body>
+</html>
