@@ -10,7 +10,6 @@ if [ ${dir:0:1} == '~' ]; then
     dir="${HOME}/${dir:2:}"
 fi
 
-
 if [ ! -d $dir ]; then
     echo "Invalid Directory!"
     exit 1
@@ -34,7 +33,7 @@ then
     exit 2
 fi
 
-if ! [ \-r "$dir/$search" ];
+if ! [ -r "$dir/$search" ];
 then 
     exit 3
 fi
