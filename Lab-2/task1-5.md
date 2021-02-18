@@ -1,3 +1,7 @@
+# Blaine Mason
+# Lab-02
+# Dr.Park
+
 # Task 1:
 1.) Write down the value of your PS1 environment variable as well as the file in which
 it was set. 

@@ -5,7 +5,7 @@
 # task8.sh
 
 if [ $# -ne 1 ]; then
-    echo "You must pass only one eargument"
+    echo "You must pass only one argument"
     exit 1
 else
     n=$1

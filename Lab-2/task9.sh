@@ -30,11 +30,13 @@ do
 done
 if [ $attempt -eq 3 ];
 then 
+    echo "no such file (after three attempts)"
     exit 2
 fi
 
 if ! [ -r "$dir/$search" ];
 then 
+    echo "file is not readable"
     exit 3
 fi
 

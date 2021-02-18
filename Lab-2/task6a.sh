@@ -2,12 +2,17 @@
 
 # Blaine Mason
 # Lab-2 Task 6
-echo "Enter the length of the base (Must be odd): "
+echo "Enter the length of the base (Must be odd and > 3): "
 read num
-if [ `expr $num % 2` -eq 0 ]; then
-  echo "Input for base must be odd"
-  exit 1
+
+if [ `expr $num % 2` -eq 0 ]; then 
+  echo "Input for base must be odd" 
+  exit 1 
 fi
+if [ $num -lt 4 ]; then 
+    echo “Input must be greater than 3.” 
+    exit 2 
+fi 
 temp=`expr $num / 2`
 star=1
 for i in $(seq 0 $temp);

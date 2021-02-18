@@ -4,15 +4,20 @@
 #Lab-2
 echo "Enter the length of the tail: "
 read tail_
-echo "Enter the length of the base (Must be odd): "
+echo "Enter the length of the base (Must be odd and > 3): "
 read base
+
+if [ `expr $base % 2` -eq 0 ]; then 
+  echo "Input for base must be odd" 
+  exit 1 
+fi
+if [ $base -lt 4 ]; then 
+  echo “Input must be greater than 3.” 
+  exit 2 
+fi
 
 space=`expr $base - 1`
 star=1
-if [ `expr $base % 2` -eq 0 ]; then
-  echo "Input for base must be odd"
-  exit 1
-fi
 while [ "$star" -le "$base" ];
 do
   for i in $(seq 1 $space);
