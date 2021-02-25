@@ -20,12 +20,12 @@ int main(int argc, char* argv[]){
     if(inFile && outFile){
         dup2(outFile, 1);
         while((asc = read(inFile, &buf, 1)) > 0){
-            if(buf != ' '){
-                printf("%d", asc);
+            if(buf == 10){
+                printf("\n");
             }else if(buf == ' '){
                 printf("%d ", (int)buf);
-            }else if((int)buf == 10){
-                printf("\n");
+            }else if(buf != ' '){
+                printf("%d ", buf);
             }
         }
     }else{

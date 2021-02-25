@@ -9,8 +9,7 @@ void err_sys(char *str)
     printf ("%s",str);
     exit (1);
 }
-int main()
-{
+int main(){
     int nbyte;
     char buffer[BUFFER_SIZE];
     while ((nbyte = read(STDIN_FILENO, buffer, BUFFER_SIZE)) >0)
