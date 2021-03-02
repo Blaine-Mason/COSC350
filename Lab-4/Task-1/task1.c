@@ -16,4 +16,3 @@ int main(int argc, char* argv[]){
     inFile = open(argv[1], O_RDONLY);
 
 }
-
