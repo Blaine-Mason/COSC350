@@ -65,5 +65,10 @@ int main(int argc, char* argv[]){
             write(copy, &aBuff, 1);
         }
     }
+    close(inFile);
+    close(alphaFile);
+    close(numFile);
+    close(otherFile);
+    close(copy);
     return 0;
 }
