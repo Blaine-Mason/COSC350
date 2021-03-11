@@ -7,7 +7,7 @@
 #include <fcntl.h>
 #include <string.h>
 
-char* convIntToStr(char * str, int x){
+char* convIntToStr(int x){
     int temp = x;
     int counter = 0;
     while(temp > 0){
@@ -45,8 +45,10 @@ int main(int argc, char* argv[]){
 
     close(inFile);
     int num = new_atoi(str, i);
+    printf("Before addition %d\n", num);
     num += 100;
-    convIntToStr(str, num);
-    write(1, str, i);
+    printf("After addition %d\n", num);
+    write(1, convIntToStr(num), i);
+    puts("");
     return 0;
 }
