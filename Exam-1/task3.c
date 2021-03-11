@@ -1,14 +1,25 @@
 // Blaine Mason
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <fcntl.h>
 #include <string.h>
 
-int convIntToStr(char * str, int x){
-    sprintf(str, "%d", x);
-    return (strlen(str));
+char* convIntToStr(char * str, int x){
+    int temp = x;
+    int counter = 0;
+    while(temp > 0){
+        counter++;
+        temp /= 10;
+    }
+    char* strn = calloc(counter + 1, sizeof(char));
+    for(int i = counter - 1; i >= 0; i--){
+        strn[i] = (x%10) + '0';
+        x /= 10;
+    }
+    return strn;
 }
 
 int new_atoi(char* str, int size){
