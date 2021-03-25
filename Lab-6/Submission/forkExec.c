@@ -20,9 +20,7 @@ int new_atoi(char* str){
         return ret;
     }
 }
-//This task instead uses the wait function to handle
-//the termination of processes
-//So they will execute in order 
+
 int main(int argc, char* argv[]){
     pid_t pid;
     char *message;
@@ -35,8 +33,7 @@ int main(int argc, char* argv[]){
             exit(1);
         case 0:
             message = "This is the child";
-            n = new_atoi(argv[1]);
-            time = new_atoi(argv[3]);
+            printf("Exec of child.c: %d\n", execlp("./child", message, argv[1], argv[3], (char *)0));
             break;
         default:
             message = "This is the parent";
@@ -44,20 +41,14 @@ int main(int argc, char* argv[]){
             time = new_atoi(argv[4]);
             break;
     }
-    if (pid != 0) {
-        int stat_val;
-        pid_t child_pid;
-        child_pid = wait(&stat_val);
-    
-        printf("Child has finished: PID = %d\n", child_pid);
-        if(WIFEXITED(stat_val))
-            printf("Child exited with code %d\n", WEXITSTATUS(stat_val));
-        else
-            printf("Child terminated abnormally\n");
-    }
     for(; n > 0; n--) {
-        puts(message);
+        printf("%s pid: %d\n", message, pid);
         sleep(time);
+        if(pid != 0){
+            puts("Waiting for child process to finish.\n");
+            wait(0);
+            puts("Child process done.\n");
+        }
     }
     exit(0);
 }
