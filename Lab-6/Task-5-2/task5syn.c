@@ -12,6 +12,8 @@ int isDigit(int c){
 int main(int argc, char *argv[]){
     pid_t pid;
     int inFile, childOut, parentOut;
+    int pOffset = 0;
+    int cOffset = 0;
     char buf;
     
     inFile = open(argv[1], O_RDONLY);
@@ -19,7 +21,6 @@ int main(int argc, char *argv[]){
         puts("Input File Error");
         exit(1);
     }
-    int len = lseek(inFile, 0, SEEK_END);
     umask(0); 
     pid = fork();
     switch(pid){
@@ -32,12 +33,11 @@ int main(int argc, char *argv[]){
                 puts("ERROR OPENING FILE");
                 exit(1);
             }
-            for (int i = 0; i < len; i++){
-                lseek(inFile, i, SEEK_SET);
-                read(inFile, &buf,1);
+            while(pread(inFile, &buf,1, pOffset)){
                 if(!isDigit(buf)){
                     write(childOut, &buf, 1);
                 }
+                pOffset++;
             }
             puts("Child Done!");
             break;
@@ -47,12 +47,11 @@ int main(int argc, char *argv[]){
                 puts("ERROR OPENING FILE");
                 exit(1);
             }
-            for(int j = 0; j < len; j++){
-                lseek(inFile, j, SEEK_SET);
-                read(inFile, &buf, 1);
+            while(pread(inFile, &buf, 1, cOffset)){
                 if(isDigit(buf)){
                     write(parentOut, &buf, 1);
                 }
+                cOffset++;
             }
             puts("Parent Done!");
             break;
@@ -60,6 +59,18 @@ int main(int argc, char *argv[]){
     close(inFile);
     close(parentOut);
     close(childOut);
+    
+    if (pid != 0) {
+        int stat_val;
+        pid_t child_pid;
+        child_pid = wait(&stat_val);
+    
+        printf("Child has finished: PID = %d\n", child_pid);
+        if(WIFEXITED(stat_val))
+            printf("Child exited with code %d\n", WEXITSTATUS(stat_val));
+        else
+            printf("Child terminated abnormally\n");
+    }
     exit(0);
 
 }
