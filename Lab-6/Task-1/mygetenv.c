@@ -24,7 +24,6 @@ char* mygetenv(const char* name){
 int main(){
     printf("PATH : %s\n", mygetenv("PATH"));
     printf("HOME : %s\n", mygetenv("HOME"));
-    printf("ROOT : %s\n", mygetenv("ROOT"));
-
+    printf("USER : %s\n", mygetenv("USER"));
     return 0;
 }

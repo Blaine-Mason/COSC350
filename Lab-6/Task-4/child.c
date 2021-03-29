@@ -30,6 +30,6 @@ int main(int argc, char* argv[]){
         printf("%s PID: %d\n", argv[0], pid);
         sleep(new_atoi(argv[2]));
     }
-    exit(37);
+    return 37;
 }
 
