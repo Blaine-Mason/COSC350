@@ -14,12 +14,12 @@ void ding(int sig)
 int main()
 {
     pid_t pid;
-    printf(“alarm application starting\n”);
+    printf("alarm application starting\n");
     pid = fork();
     switch(pid) {
         case -1:
             /* Failure */
-            perror(“fork failed”);
+            perror("fork failed");
             exit(1);
         case 0:
             /* child */
@@ -28,12 +28,20 @@ int main()
             exit(0);
     }
     /* if we get here we are the parent process */
-    printf(“waiting for alarm to go off\n”);
-    (void) signal(SIGALRM, ding);
+    printf("waiting for alarm to go off\n");
+    struct sigaction act;
+    act.sa_handler = ding;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = 0;
+    if (sigaction(SIGALRM, &act, 0)) {
+		perror("sigaction error");
+		return 1;
+	}
     pause();
-    if (alarm_fired)
-        printf(“Ding!\n”);
-    printf(“done\n”);
+    if (alarm_fired) {
+		printf("Ding!\n");
+	}
+    printf("done\n");
     exit(0);
 
 }
