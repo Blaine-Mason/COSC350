@@ -4,7 +4,6 @@
 
 void ouch(int sig){
     printf("OUCH! - I got signal %d\n", sig);
-    
 }
 
 int main(){
