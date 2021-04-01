@@ -28,7 +28,8 @@ int main(){
             puts("Error Forking");
             return -1;
         case 0:
-            kill(pid1, SIGUSR1);
+            kill(getppid(), SIGUSR1);
+            exit(0);
             break;
         default:
             pid2 = fork();
@@ -39,8 +40,9 @@ int main(){
                     break;
                 case 0:
                     //Second Child waiting for First Child to finish
-                    //cKill = waitpid(pid1, &status, WUNTRACED);
-                    kill(pid2, SIGUSR2);
+                    cKill = waitpid(pid1, &status, WUNTRACED);
+                    kill(getppid(), SIGUSR2);
+                    exit(0);
                     break;
                 default:
                     sigaction(SIGUSR1, &catch, NULL);
