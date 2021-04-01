@@ -14,15 +14,16 @@ void handler(int sig){
 
 int main(){
     pid_t  pid1, pid2;
-    
+
     pid1 = fork();
     switch(pid1){
         case -1:
             puts("Error Forking");
             return -1;
         case 0:
-            kill(pid1, SIGUSR1);
-            pause();
+            puts("I AM CHILD OF PARENT");
+            kill(getppid(), SIGUSR1);
+            _exit(0);
             break;
         default:
             pid2 = fork();
@@ -30,17 +31,18 @@ int main(){
                 case -1:
                     puts("Error Forking");
                     return -1;
-                    break;
                 case 0:
                     //Second Child waiting for First Child to finish
-                    kill(pid2, SIGUSR2);
-                    pause();
+                    puts("I AM CHILD OF CHILD");
+                    kill(getppid(), SIGUSR2);
+                    _exit(0);
                     break;
                 default:
                     signal(SIGUSR1, handler);
-			        signal(SIGUSR2, handler);
+                    signal(SIGUSR2, handler);
+                    pause();
+                    pause();
                     exit(0);
-                    break;
             }
     }
     return 0;
