@@ -1,47 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/wait.h>
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+#include<signal.h>
+#include<sys/wait.h>
 
 void handler(int sig){
-    if(sig == SIGUSR1){
-        puts("Hi Honey! Anything wrong?");
-    }else if(sig == SIGUSR2){
-        puts("Do you make trouble again?");
-    }
+	if(sig==SIGUSR1)
+		printf("Hi Honey! Anything wrong?\n");
+	
+	if(sig==SIGUSR2)
+		printf("Do you make trouble again?\n");
 }
 
-int main(){
-    pid_t  pid1, pid2;
-
-    pid1 = fork();
-    switch(pid1){
-        case -1:
-            puts("Error Forking");
-            return -1;
+int main(int argc, char** argv){
+	
+	pid_t pid,pid2;
+	signal(SIGUSR1,handler);	
+	signal(SIGUSR2,handler);
+	
+	pid=fork();
+	
+	switch(pid){
         case 0:
-            kill(getppid(), SIGUSR1);
-            _exit(0);
-            break;
-        default:
-            pid2 = fork();
-            switch(pid2){
-                case -1:
-                    puts("Error Forking");
-                    return -1;
+			kill(getppid(),SIGUSR1);
+			exit(0);
+		default:
+		    waitpid(pid,NULL,0);
+		    pid2=fork();
+		    switch(pid2){
                 case 0:
-                    //Second Child waiting for First Child to finish
-                    kill(getppid(), SIGUSR2);
-                    _exit(0);
-                    break;
+			        kill(getppid(),SIGUSR2);	
+			        exit(0);
                 default:
-                    signal(SIGUSR1, handler);
-                    signal(SIGUSR2, handler);
-                    pause();
-                    pause();
-                    _exit(0);
-            }
+		            waitpid(pid2,NULL,0);	
+		    }
     }
-    return 0;
+	return 0;
 }
