@@ -13,13 +13,6 @@ void handler(int sig){
 }
 
 int main(){
-
-    struct sigaction catch;
-    catch.sa_handler = handler;
-    sigemptyset(&catch.sa_mask);
-    catch.sa_flags = 0;
-
-    int status, cKill;
     pid_t  pid1, pid2;
     
     pid1 = fork();
@@ -28,8 +21,8 @@ int main(){
             puts("Error Forking");
             return -1;
         case 0:
-            kill(getppid(), SIGUSR1);
-            exit(0);
+            kill(pid1, SIGUSR1);
+            pause();
             break;
         default:
             pid2 = fork();
@@ -40,15 +33,12 @@ int main(){
                     break;
                 case 0:
                     //Second Child waiting for First Child to finish
-                    cKill = waitpid(pid1, &status, WUNTRACED);
-                    kill(getppid(), SIGUSR2);
-                    exit(0);
+                    kill(pid2, SIGUSR2);
+                    pause();
                     break;
                 default:
-                    sigaction(SIGUSR1, &catch, NULL);
-                    pause();
-                    sigaction(SIGUSR2, &catch, NULL);
-                    pause();
+                    signal(SIGUSR1, handler);
+			        signal(SIGUSR2, handler);
                     exit(0);
                     break;
             }
