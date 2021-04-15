@@ -16,11 +16,11 @@ int main(int argc, char* argv[]){
     pid = fork();
     if(pid > 0){
         close(fileDes[0]);
-        printf("Enter 2 integers\n");
+        printf("Enter 2 integers");
         while ((size = read(STDIN_FILENO, setLine, MAXLINE)) > 0){
             write(fileDes[1], setLine, size);
             sleep(1);
-            printf("Enter 2 integers\n");
+            printf("Enter 2 integers");
         }
             
     }else{
